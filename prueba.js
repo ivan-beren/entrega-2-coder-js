@@ -114,7 +114,7 @@
                 console.log("Se deja de ingresar prensado por equipo sobrecargado")
             }
         },
-        TrasnferirHarina: function(volumen){
+        trasnferirHarina: function(volumen){
             if(volumen > 0 && volumen <= this.volumenSecado && volumen <= (silo.capacidad - silo.volumenActual)){
                 this.volumenSecado -= volumen
                 silo.volumenActual += volumen
@@ -136,7 +136,8 @@
         volumenActual: 0,
         averiguarBolsas: function(){
             let bolsasDisponibles = Math.floor(this.volumenActual / 50)
-            alert(`La cantidad de bolsas disponibles es ${bolsasDisponibles}`)
+            console.log(`La cantidad de bolsas disponibles es ${bolsasDisponibles}`)
+            return bolsasDisponibles
         },
         sacarBolsas: function(cantidadBolsas){
             if(cantidadBolsas <= Math.floor(this.volumenActual / 50)){
@@ -147,6 +148,8 @@
         },
     }
 
+
+
     const organizadorLote={
         bolsasTotales: 0,
         crearLote: function(){
@@ -156,7 +159,7 @@
                 for(let i = 0; i < lotesDisponibles; i++){
                     Lotes.push(`Lote numero ${Lotes.length + 1}`)
                 }
-            }
+            }return lotesDisponibles
         },
     }
 
@@ -168,7 +171,6 @@ function accionPescado () {
     let ingreso = parseInt(prompt("Ingrese la cantidad de pescado que ingresa a la pileta y luego va al cocinador"))
     if(ingreso > 0){
         pileta.ingresoPescado(ingreso)
-
         pileta.transferirPescado(2000)
     }
 }
@@ -216,4 +218,169 @@ function main () {
     console.log(Lotes)
 }
 
-main()
+//main()
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ---------------------------------- DOM y Event Listener de Pileta ---------------------------------- //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let inputPileta = document.getElementById('input1')
+let boton1 = document.getElementById("btn1")
+let boton2 = document.getElementById("btn2")
+let volumenPileta = document.getElementById('volumenActual')
+
+function insertarPescadoPileta () {
+    let numero = parseInt(inputPileta.value)
+    pileta.ingresoPescado(numero)
+    inputPileta.value = ''
+    volumenPileta.innerHTML = `Volumen Actual: <strong>${pileta.volumenActual} Kg</strong>`
+}
+
+function transferirPescadoCocinador () {
+    let numero = parseInt(inputPileta.value)
+    pileta.transferirPescado(numero)
+    inputPileta.value = ''
+    volumenPileta.innerHTML = `Volumen Actual: <strong>${pileta.volumenActual} Kg</strong>`
+    volumenCrudo.innerHTML = `Volumen Crudo: <strong>${cocinador.volumenCrudo} Kg</strong>`
+}
+
+boton1.addEventListener('click', insertarPescadoPileta)
+boton2.addEventListener('click', transferirPescadoCocinador)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// --------------------------------- DOM y Event Listener de Cocinador --------------------------------- //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let volumenCrudo = document.getElementById('volumenCrudo')
+let volumenCocinado = document.getElementById('volumenCocinado')
+let btnCocinar = document.getElementById('btnCocinar')
+let inputCocinador = document.getElementById('inputCocinador')
+let btnTransCocinado = document.getElementById('btnTransCocinado')
+
+function cocinarPescadoCrudo () {
+    let numero = parseInt(inputCocinador.value)
+    cocinador.cocinarPescado(numero)
+    inputCocinador.value = ''
+    volumenCrudo.innerHTML = `Volumen Crudo: <strong>${cocinador.volumenCrudo} Kg</strong>`
+    volumenCocinado.innerHTML = `Volumen Cocinado: <strong>${cocinador.volumenCocinado} Kg</strong>`
+}
+
+function transferirPescadoCocinado () {
+    let numero = parseInt(inputCocinador.value)
+    cocinador.transferirPescado(numero)
+    inputCocinador.value = ''
+    volumenCocinado.innerHTML = `Volumen Cocinado: <strong>${cocinador.volumenCocinado} Kg</strong>`
+    volumenCocinadoPrensa.innerHTML = `Volumen Cocinado: <strong>${prensa.volumenActual} Kg</strong>`
+}
+
+btnCocinar.addEventListener('click', cocinarPescadoCrudo)
+btnTransCocinado.addEventListener('click',transferirPescadoCocinado)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// --------------------------------- DOM y Event Listener de la Prensa --------------------------------- //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let volumenCocinadoPrensa = document.getElementById('volumenCocinadoPrensa')
+let volumenPrensado = document.getElementById('volumenPrensado')
+let btnCocinado = document.getElementById('btnCocinado')
+let inputPrensa = document.getElementById('inputPrensa')
+let btnTransPrensado = document.getElementById('btnTransPrensado')
+
+function prensarCocinado () {
+    let numero = parseInt(inputPrensa.value)
+    prensa.prensarPescado(numero)
+    inputPrensa.value = ''
+    volumenCocinadoPrensa.innerHTML = `Volumen Cocinado: <strong>${prensa.volumenActual} Kg</strong>`
+    volumenPrensado.innerHTML = `Volumen Prensado: <strong>${prensa.volumenPrensado} Kg</strong>`
+}
+
+function transferirPrensado () {
+    let numero = parseInt(inputPrensa.value)
+    prensa.transferirPrensado(numero)
+    inputPrensa.value = ''
+    volumenPrensado.innerHTML = `Volumen Prensado: <strong>${prensa.volumenPrensado} Kg</strong>`
+    volumenPrensadoRtd.innerHTML = `Volumen Rotadisco: <strong>${rtd.volumenActual} Kg</strong>`
+}
+
+btnCocinado.addEventListener('click', prensarCocinado)
+btnTransPrensado.addEventListener('click', transferirPrensado)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// --------------------------------- DOM y Event Listener de Rotadisco --------------------------------- //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let volumenPrensadoRtd = document.getElementById('volumenPrensadoRtd')
+let volumenHarinaRtd = document.getElementById('volumenHarinaRtd')
+let btnSecarHarina = document.getElementById('btnSecarHarina')
+let inputRtd = document.getElementById('inputRtd')
+let btnTransHarina = document.getElementById('btnTransHarina')
+
+function secarPrensado () {
+    let numero = parseInt(inputRtd.value)
+    rtd.secarPrensado(numero)
+    inputRtd.value = ''
+    volumenPrensadoRtd.innerHTML = `Volumen Prensado: <strong>${rtd.volumenActual} Kg</strong>`
+    volumenHarinaRtd.innerHTML = `Volumen Harina: <strong>${rtd.volumenSecado} Kg</strong>`
+}
+
+function trasnferirHarinaLote () {
+    let numero = parseInt(inputRtd.value)
+    rtd.trasnferirHarina(numero)
+    inputRtd.value = ''
+    volumenHarinaRtd.innerHTML = `Volumen Harina: <strong>${rtd.volumenSecado} Kg</strong>`
+    volumenHarinaSilo.innerHTML = `Volumen Harina: <strong>${silo.volumenActual} Kg</strong>`
+}
+
+btnSecarHarina.addEventListener('click', secarPrensado)
+btnTransHarina.addEventListener('click', trasnferirHarinaLote)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// --------------------------------- DOM y Event Listener del Silo --------------------------------- //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let volumenHarinaSilo = document.getElementById('volumenHarinaSilo')
+let cantidadBolsaSilo = document.getElementById('cantidadBolsaSilo')
+let btnBolsaSilo = document.getElementById('btnBolsaSilo')
+let inputSilo = document.getElementById('inputSilo')
+let btnSacarBolsas = document.getElementById('btnSacarBolsas')
+
+
+
+function averiguarBolsaSilo () {
+    let bolsas = silo.averiguarBolsas()
+    inputSilo.value = ''
+    cantidadBolsaSilo.innerHTML = `Bolsas de 50 Kg: <strong>${bolsas} bolsas</strong> `
+}
+
+function sacarBolsaSilo () {
+    let numero = parseInt(inputSilo.value)
+    silo.sacarBolsas(numero)
+    let bolsas = silo.averiguarBolsas()
+    inputSilo.value = ''
+    volumenHarinaSilo.innerHTML = `Volumen Harina: <strong>${silo.volumenActual} Kg</strong>`
+    cantidadBolsaSilo.innerHTML = `Bolsas de 50 Kg: <strong>${bolsas}</strong> `
+}
+
+btnBolsaSilo.addEventListener('click', averiguarBolsaSilo)
+btnSacarBolsas.addEventListener('click', sacarBolsaSilo)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// --------------------------------- DOM y Event Listener de Lotes --------------------------------- //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let bolsasDisponibles = document.getElementById('bolsasDisponibles')
+let lotesDisponibles = document.getElementById('lotesDisponibles')
+let crearLote = document.getElementById('crearLote')
+let btnCrearLote = document.getElementById('btnCrearLote')
+let btnVerLote = document.getElementById('btnVerLote')
+
+function funCrearLote () {
+
+}
+
+function funVerLote () {
+
+}
+
+btnCrearLote.addEventListener('click', funCrearLote)
+btnVerLote.addEventListener('click', funVerLote)
+
