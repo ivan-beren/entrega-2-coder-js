@@ -2,7 +2,7 @@
     
     const pileta = {
         materiaPrima: "Pescado",
-        capacidad: 50000,
+        capacidad: 10000,
         volumenActual: 0,
         ingresoPescado: function(volumen){
             if (volumen <= this.capacidad && volumen <= (this.capacidad-this.volumenActual)){
@@ -29,7 +29,7 @@
 
     const cocinador = {
         materiaPrima: "Pescado",
-        capacidad: 2000,
+        capacidad: 10000,
         volumenCrudo: 0,
         volumenCocinado: 0,
         temperaturaOptima: 0,
@@ -65,7 +65,7 @@
 
     const prensa = {
         materiaPrima: "Prensado",
-        capacidad: 2000,
+        capacidad: 10000,
         volumenActual: 0,
         volumenPrensado: 0,
         temperatura: 0,
@@ -98,7 +98,7 @@
 
     const rtd = {
         materiaPrima: "Harina de Pescado",
-        capacidad: 2000,
+        capacidad: 10000,
         volumenActual: 0,
         volumenSecado: 0,
         temperatura: 0,
@@ -132,7 +132,7 @@
 
     const silo={
         producto: "Harina de Pescado",
-        capacidad: 25000,
+        capacidad: 10000,
         volumenActual: 0,
         averiguarBolsas: function(){
             let bolsasDisponibles = Math.floor(this.volumenActual / 50)
@@ -169,7 +169,7 @@ function accionPescado () {
     if(ingreso > 0){
         pileta.ingresoPescado(ingreso)
 
-        pileta.transferirPescado(2000)
+        pileta.transferirPescado(ingreso)
     }
 }
 
