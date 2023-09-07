@@ -148,8 +148,6 @@
         },
     }
 
-
-
     const organizadorLote={
         bolsasTotales: 0,
         crearLote: function(){
@@ -159,67 +157,12 @@
                 for(let i = 0; i < lotesDisponibles; i++){
                     Lotes.push(`Lote numero ${Lotes.length + 1}`)
                 }
-            }return lotesDisponibles
+            }
         },
     }
 
     const Lotes = [];
 
-
-    
-function accionPescado () {
-    let ingreso = parseInt(prompt("Ingrese la cantidad de pescado que ingresa a la pileta y luego va al cocinador"))
-    if(ingreso > 0){
-        pileta.ingresoPescado(ingreso)
-        pileta.transferirPescado(ingreso)
-        pileta.transferirPescado(2000)
-    }
-}
-
-function accionCocinador () {
-    let ingreso = parseInt(prompt(`Hay ${cocinador.volumenCrudo} kilos de pescado en el cocinador. ¿Cuantos deseas cocinar y trasnferir?`))
-    if(ingreso > 0 && ingreso <= cocinador.volumenCrudo){
-        cocinador.cocinarPescado(ingreso)
-        cocinador.transferirPescado(ingreso)
-    }
-}
-
-function accionPrensa () {
-    let ingreso = parseInt(prompt(`Hay ${prensa.volumenActual} kilos de pescado cocinado en la prensa. ¿Cuanto deseas prensar y transferir al rotadisco?`))
-    if(ingreso > 0 && ingreso <= prensa.capacidad){
-        prensa.prensarPescado(ingreso)
-        prensa.transferirPrensado(ingreso)
-    }
-}
-
-function accionRtd () {
-    let ingreso = parseInt(prompt(`Hay ${rtd.volumenActual} kilos de pescado ya cocinado y prensado en el rotadisco. ¿Cuanto deseas secar y transferir al silo?`))
-    if(ingreso > 0 && ingreso <= rtd.capacidad){
-        rtd.secarPrensado(ingreso)
-        rtd.TrasnferirHarina(ingreso)
-    }
-}
-
-function accionSilo () {
-    silo.averiguarBolsas()
-    let ingreso = parseInt(prompt(`¿Cuantas bolsas deseas sacar?`))
-    if(ingreso > 0 && ingreso < silo.capacidad){
-        silo.sacarBolsas(ingreso)
-        organizadorLote.crearLote()
-    }
-}
-
-function main () {
-    accionPescado()
-    accionCocinador()
-    accionPrensa()
-    accionRtd()
-    accionSilo()
-    alert(`Se crearon ${Lotes.length} lotes`)
-    console.log(Lotes)
-}
-
-//main()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ---------------------------------- DOM y Event Listener de Pileta ---------------------------------- //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -359,6 +302,7 @@ function sacarBolsaSilo () {
     inputSilo.value = ''
     volumenHarinaSilo.innerHTML = `Volumen Harina: <strong>${silo.volumenActual} Kg</strong>`
     cantidadBolsaSilo.innerHTML = `Bolsas de 50 Kg: <strong>${bolsas}</strong> `
+    bolsasDisponibles.innerHTML = `Bolsas Disponibles: <strong>${organizadorLote.bolsasTotales} bolsas</strong>`
 }
 
 btnBolsaSilo.addEventListener('click', averiguarBolsaSilo)
@@ -369,19 +313,14 @@ btnSacarBolsas.addEventListener('click', sacarBolsaSilo)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let bolsasDisponibles = document.getElementById('bolsasDisponibles')
-let lotesDisponibles = document.getElementById('lotesDisponibles')
-let crearLote = document.getElementById('crearLote')
+let pilasDisponibles = document.getElementById('pilasDisponibles')
 let btnCrearLote = document.getElementById('btnCrearLote')
-let btnVerLote = document.getElementById('btnVerLote')
 
 function funCrearLote () {
-
-}
-
-function funVerLote () {
-
+    organizadorLote.crearLote()
+    bolsasDisponibles.innerHTML = `Bolsas Disponibles: <strong>${organizadorLote.bolsasTotales} bolsas</strong>`
+    pilasDisponibles.innerHTML = `Cantidad de Lotes: <strong>${Lotes.length}</strong>`
 }
 
 btnCrearLote.addEventListener('click', funCrearLote)
-btnVerLote.addEventListener('click', funVerLote)
 
