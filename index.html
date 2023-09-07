@@ -1,12 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+    <div class="container">
+        <div class="contenedor1">
+
+            <div class="titulo1">
+                <h2>Pileta</h2>
+            </div>
     
-    <script src="prueba.js"></script>
+            <div class="medio">
+                <div class="medioIzquierda">
+                    <p>Contenido: <strong>Pescado</strong></p>
+                    <p>Capacidad Maxima: <strong>50000 Kg</strong></p>
+                    <p id="volumenActual">Volumen Actual: <strong>0 Kg</strong></p>
+                </div>
+                <div class="medioDerecha imagen">
+                    <img src="/fotos-coomarpes/pileta1.jpeg" alt="">
+                </div>
+            </div>
+    
+            <div class="botones">
+                <div>
+                    <button id="btn1">Agregar Pescado</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Cantidad a usar" id="input1">
+                </div>
+                <div>
+                    <button id="btn2"> Procesar y transferir</button>
+                </div>
+            </div>
+    
+        </div>
+        <div class="contenedor1">
+
+            <div class="titulo1">
+                <h2>Cocinador</h2>
+            </div>
+    
+            <div class="medio">
+                <div class="medioIzquierda">
+                    <p>Capacidad Maxima: <Strong>2000 Kg</Strong></p>
+                    <p id="volumenCrudo">Volumen Crudo: <strong>0 Kg</strong></p>
+                    <p id="volumenCocinado">Volumen Cocinado: <strong>0 Kg</strong></p>
+                </div>
+                <div class="medioDerecha imagen">
+                    <img src="/fotos-coomarpes/Cocinador 2.JPG" alt="">
+                </div>
+            </div>
+    
+            <div class="botones">
+                <div>
+                    <button id="btnCocinar">Cocinar Pescado</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Cantidad a usar" id="inputCocinador">
+                </div>
+                <div>
+                    <button id="btnTransCocinado">Trasnferir Cocinado</button>
+                </div>
+            </div>
+    
+        </div>
+        <div class="contenedor1">
+
+            <div class="titulo1">
+                <h2>Prensa</h2>
+            </div>
+    
+            <div class="medio">
+                <div class="medioIzquierda">
+                    <p>Capacidad Maxima: <Strong>2000 Kg</Strong></p>
+                    <p id="volumenCocinadoPrensa">Volumen Cocinado: <strong>0 Kg</strong></p>
+                    <p id="volumenPrensado">Volumen Prensado: <strong>0 Kg</strong></p>
+                </div>
+                <div class="medioDerecha imagen">
+                    <img src="/fotos-coomarpes/Prensa 1.JPG" alt="">
+                </div>
+            </div>
+    
+            <div class="botones">
+                <div>
+                    <button id="btnCocinado">Prensar Pescado</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Cantidad a usar" id="inputPrensa">
+                </div>
+                <div>
+                    <button id="btnTransPrensado">Transferir Prensado</button>
+                </div>
+            </div>
+    
+        </div>
+        <div class="contenedor1">
+
+            <div class="titulo1">
+                <h2>Rotadisco</h2>
+            </div>
+    
+            <div class="medio">
+                <div class="medioIzquierda">
+                    <p>Capacidad Maxima: <strong>2000 Kg</strong></p>
+                    <p id="volumenPrensadoRtd">Volumen Prensado: <strong>0 Kg</strong></p>
+                    <p id="volumenHarinaRtd">Volumen Harina: <strong>0 Kg</strong></p>
+                </div>
+                <div class="medioDerecha imagen">
+                    <img src="" alt="">
+                </div>
+            </div>
+    
+            <div class="botones">
+                <div>
+                    <button id="btnSecarHarina">Secar Harina</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Cantidad a usar" id="inputRtd">
+                </div>
+                <div>
+                    <button id="btnTransHarina">Transferir Harina</button>
+                </div>
+            </div>
+    
+        </div>
+        <div class="contenedor1">
+
+            <div class="titulo1">
+                <h2>Silo</h2>
+            </div>
+    
+            <div class="medio">
+                <div class="medioIzquierda">
+                    <p>Capacidad Maxima: <strong>25000 Kg</strong></p>
+                    <p id="volumenHarinaSilo">Volumen Harina: <strong>0 Kg</strong></p>
+                    <p id="cantidadBolsaSilo">Bolsas de 50 Kg: <strong>0</strong> </p>
+                </div>
+                <div class="medioDerecha imagen">
+                    <img src="" alt="">
+                </div>
+            </div>
+    
+            <div class="botones">
+                <div>
+                    <button id="btnBolsaSilo">Averiguar Bolsas</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Cantidad a usar" id="inputSilo">
+                </div>
+                <div>
+                    <button id="btnSacarBolsas">Sacar Bolsas</button>
+                </div>
+            </div>
+    
+        </div>
+        <div class="contenedor1">
+
+            <div class="titulo1">
+                <h2>Lotes</h2>
+            </div>
+    
+            <div class="medio">
+                <div class="medioIzquierda">
+                    <p id="bolsasDisponibles">Bolsas Disponibles: <strong>0</strong> </p>
+                    <p id="lotesDisponibles">Cantidad de Lotes: <strong>0</strong></p>
+                </div>
+                <div class="medioDerecha imagen">
+                    <img src="" alt="">
+                </div>
+            </div>
+    
+            <div class="botones">
+                <div>
+                    <button id="crearLote">Crear Lotes</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Cantidad a usar" id="inputLote">
+                </div>
+                <div>
+                    <button id="verLote">Ver Lotes</button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+
+
 </body>
+<script src="prueba.js"></script>
+
 </html>
