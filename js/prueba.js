@@ -1,5 +1,9 @@
     let volumen=0;
     
+//Se comienza el proceso de produccion de la harina de pescado ingresando la materia prima
+//que en este caso sería el residuo de pescado, una vez que ingresa, se puede trasnferir
+//al cocinador para cocinar el mismo
+
     const pileta = {
         materiaPrima: "Pescado",
         capacidad: 10000,
@@ -26,6 +30,8 @@
             }
         },
     }
+
+//El cocinador recibe pescado crudo y lo cocina antes de ser trasnferido a la prensa
 
     const cocinador = {
         materiaPrima: "Pescado",
@@ -63,6 +69,9 @@
         },
     }
 
+//La prensa se encarga de prensar el pescado cocinado para extrarle la mayor cantidad de agua posible
+//antes de transferirlo al rotadisco secarlo
+
     const prensa = {
         materiaPrima: "Prensado",
         capacidad: 10000,
@@ -95,6 +104,9 @@
             }
         },
     }
+
+//El rotadisco se encarga de secar la harina para que salga con los parametros requerido
+//por los mercados para que pueda ser comercializada, se transfiere al silo
 
     const rtd = {
         materiaPrima: "Harina de Pescado",
@@ -130,6 +142,10 @@
         },
     }
 
+//En el silo se almacena la harina antes de ser embolsada en bolsas de 50Kg, una ves que
+//se sabe la cantidad de bolsas necesarias para ser comercializadas, se procede a sacar
+//bolsas que seran agregadas a distintos lotes
+
     const silo={
         producto: "Harina de Pescado",
         capacidad: 10000,
@@ -148,6 +164,9 @@
         },
     }
 
+//Los lotes se organizan con una cantidad limitada de bolsas, cada lote contiene un maximo de 10 bolsas
+//Cuando se completa un lote se comienza con otro, para identificarlos se van enumerando "Lote 1 - Lote 2 - etc"
+
     const organizadorLote={
         bolsasTotales: 0,
         crearLote: function(){
@@ -156,8 +175,11 @@
                 this.bolsasTotales -= lotesDisponibles * 10
                 for(let i = 0; i < lotesDisponibles; i++){
                     Lotes.push(`Lote numero ${Lotes.length + 1}`)
+                    console.log(`Se crean ${Lotes.length + 1} Lotes`)
                 }
             }
+            // Se guardan las bolsas totales en localStorage
+            localStorage.setItem('bolsasTotales', this.bolsasTotales);
         },
     }
 
@@ -316,6 +338,11 @@ let bolsasDisponibles = document.getElementById('bolsasDisponibles')
 let pilasDisponibles = document.getElementById('pilasDisponibles')
 let btnCrearLote = document.getElementById('btnCrearLote')
 
+const storedBolsasTotales = localStorage.getItem('bolsasTotales');
+    if (storedBolsasTotales) {
+        organizadorLote.bolsasTotales = parseInt(storedBolsasTotales);
+}
+
 function funCrearLote () {
     organizadorLote.crearLote()
     bolsasDisponibles.innerHTML = `Bolsas Disponibles: <strong>${organizadorLote.bolsasTotales} bolsas</strong>`
@@ -323,4 +350,3 @@ function funCrearLote () {
 }
 
 btnCrearLote.addEventListener('click', funCrearLote)
-
