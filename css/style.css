@@ -12,11 +12,11 @@ body{
 }
 
 
-.contenedor1{
+.contenedor{
     border: solid black 3px;
     border-radius: 1em;
     width: 25em;
-    height: 15em;
+    height: 20em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,7 +26,7 @@ body{
     background-color: white;
 }
 
-.titulo1{
+.titulo{
     height: 3em;
     display: flex;
     align-items: center;
@@ -61,10 +61,21 @@ img{
     /* border: solid red 1px; */
     display: flex;
     width: 100%;
+    margin: 0 1em 0 1em;
     justify-content: space-around;
     align-items: center;
 }
 input{
     margin: 0 1em 0 1em;
     height: 2.2em;
+}
+
+.info{
+    border: solid black 1px;
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    width: 390px;
+    margin-top: 2px;
+    border-radius: 10px;
 }

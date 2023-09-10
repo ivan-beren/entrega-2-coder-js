@@ -4,29 +4,37 @@
 //que en este caso sería el residuo de pescado, una vez que ingresa, se puede trasnferir
 //al cocinador para cocinar el mismo
 
+//La pileta soporta 350000Kg de materia prima
+
     const pileta = {
         materiaPrima: "Pescado",
-        capacidad: 10000,
+        capacidad: 50000,
         volumenActual: 0,
         ingresoPescado: function(volumen){
+            //Se indican las condicones para que ingrese pescado, que el volumen ingresado sea menor a la capacidad que
+            //soporta la pileta y que sea menor o igual a la cantidad que sobra entre la capacidad y lo que ya hay en 
+            //pileta, se aplicaria para un segundo ingreso de materia prima
             if (volumen <= this.capacidad && volumen <= (this.capacidad-this.volumenActual)){
             this.volumenActual += volumen
-            console.log(`Se ingresan ${volumen} kilos de pescado`)
+            infoPileta.innerHTML = (`Se ingresan ${volumen} kilos de pescado a la pileta`)
             }else{
-            console.log(`Se alcanzo la capacidad maxima de pescado en la pileta`)
+            //En cualquiera de los dos casos, se superaria la capacidad y no ingresaria esa cantidad de pescado
+            infoPileta.innerHTML = (`Se alcanzo la capacidad maxima de pescado en la pileta`)
             }
         },
         transferirPescado: function(volumen){
-            if (this.volumenActual > 0 && volumen <= this.volumenActual && volumen <= (cocinador.capacidad-cocinador.volumenCrudo)){
+            if (this.volumenActual > 0 && volumen <= this.volumenActual && volumen <= (cocinador.capacidad-(cocinador.volumenCrudo + cocinador.volumenCocinado))){
+                //Este if transfiere materia prima si se cumplen 3 condiciones: 1ro, que el vol
                 this.volumenActual -= volumen
                 cocinador.volumenCrudo += volumen
-                console.log(`Se transfirieron ${volumen} kilos de pescado al cocinador`)
+                infoPileta.innerHTML = (`Se transfirieron ${volumen} kilos de pescado al cocinador`)
             }else if(this.volumenActual == 0){
-                console.log(`No se puede transferir porque no hay pescado en pileta`)
-            }else if(volumen >= this.volumenActual){
-                console.log(`Se quieren trasnferir ${volumen} kilos de pescado, pero solo hay disponibles ${this.volumenActual}`)
+                infoPileta.innerHTML = (`No se puede transferir porque no hay pescado en pileta`)
+            }else if(volumen > this.volumenActual){
+                //Este if me avisa si quiero transferir mas cantidad de la que hay en la pileta
+                infoPileta.innerHTML = (`Se quieren trasnferir ${volumen} kilos de pescado, pero solo hay disponibles ${this.volumenActual}`)
             }else{
-                console.log(`La cantidad de pescado que quiere transferir supera la capacidad maxima del cocinador`)
+                infoPileta.innerHTML = (`La cantidad de pescado que quiere transferir supera la capacidad maxima del cocinador`)
             }
         },
     }
@@ -35,35 +43,32 @@
 
     const cocinador = {
         materiaPrima: "Pescado",
-        capacidad: 10000,
+        capacidad: 2000,
         volumenCrudo: 0,
         volumenCocinado: 0,
-        temperaturaOptima: 0,
-        velocidadRodamiento: 0,
-        tiempoCoccion: 0,
         cocinarPescado: function(volumen){
             if (volumen > 0 && volumen <= this.volumenCrudo){
                 this.volumenCrudo -= volumen
                 this.volumenCocinado += volumen
-                console.log(`Se cocinaron ${volumen} de pescado crudo`)
+                infoCocinador.innerHTML = (`Se cocinaron ${volumen} de pescado crudo`)
             }else if(volumen == 0){
-                console.log(`No hay pescado crudo para cocinar`)
+                infoCocinador.innerHTML = (`No hay pescado crudo para cocinar`)
             }else{
-                console.log(`Se quieren cocinar ${volumen} kilos de pescado pero solo hay disponible ${this.volumenCrudo}`)
+                infoCocinador.innerHTML = (`Se quieren cocinar ${volumen} kilos de pescado pero solo hay disponible ${this.volumenCrudo}`)
             }
         },
         transferirPescado: function(volumen){
-            if (this.volumenCocinado > 0 && volumen <= this.volumenCocinado && volumen <= (prensa.capacidad-prensa.volumenActual)){
+            if (this.volumenCocinado > 0 && volumen <= this.volumenCocinado && volumen <= (prensa.capacidad-(prensa.volumenActual + prensa.volumenPrensado))){
                 this.volumenCocinado -= volumen
                 prensa.volumenActual += volumen
-                console.log(`Se transfieren ${volumen} de pescado cocinado a la prensa`)
+                infoCocinador.innerHTML = (`Se transfieren ${volumen} de pescado cocinado a la prensa`)
             }else{
                 if (this.volumenCocinado == 0){
-                    console.log(`No se puede transferir porque no hay pescado cocinado`)
+                    infoCocinador.innerHTML = (`No se puede transferir porque no hay pescado cocinado`)
                 }else if (volumen > this.volumenCocinado){
-                    console.log(`Usted quiso transferir ${volumen} kilos de pescado pero solo hay disponible ${this.volumenCocinado}`)
+                    infoCocinador.innerHTML = (`Usted quiso transferir ${volumen} kilos de pescado pero solo hay disponible ${this.volumenCocinado}`)
                 }else{
-                    console.log(`La cantidad de pescado cocinado que quiere transferir supera la capacidad maxima de la prensa`)
+                    infoCocinador.innerHTML = (`La cantidad de pescado cocinado que quiere transferir supera la capacidad maxima de la prensa`)
                 }
             }
         },
@@ -74,7 +79,7 @@
 
     const prensa = {
         materiaPrima: "Prensado",
-        capacidad: 10000,
+        capacidad: 2000,
         volumenActual: 0,
         volumenPrensado: 0,
         temperatura: 0,
@@ -83,24 +88,24 @@
             if (volumen > 0 && volumen <= this.volumenActual){
                 this.volumenActual -= volumen
                 this.volumenPrensado += volumen
-                console.log(`Se prensan ${volumen} de pescado previamente cocinado`)
+                infoPrensa.innerHTML = (`Se prensan ${volumen} de pescado previamente cocinado`)
             }else if(volumen == 0){
-                console.log("No hay pescado para prensar")
+                infoPrensa.innerHTML = ("No hay pescado para prensar")
             }else{
-                console.log("Se deja de ingresar pescado por equipo sobrecargado")
+                infoPrensa.innerHTML = ("Se deja de ingresar pescado por equipo sobrecargado")
             }
         },
         transferirPrensado: function(volumen){
-            if (volumen > 0 && volumen <= this.volumenPrensado && volumen <= (rtd.capacidad-rtd.volumenActual)){
+            if (volumen > 0 && volumen <= this.volumenPrensado && volumen <= (rtd.capacidad-(rtd.volumenActual + rtd.volumenSecado))){
                 this.volumenPrensado -= volumen
                 rtd.volumenActual += volumen
-                console.log(`Se transfieren ${volumen} kilos de prensado al rotadisco`)
+                infoPrensa.innerHTML = (`Se transfieren ${volumen} kilos de prensado al rotadisco`)
             }else if(volumen == 0){
-                console.log(`No hay pescado prensado`)
+                infoPrensa.innerHTML = (`No hay pescado prensado`)
             }else if(volumen > this.volumenPrensado){
-                console.log(`Se quieren transferir ${volumen} kilos de prensado pero solo hay ${this.volumenPrensado} disponibles`)
+                infoPrensa.innerHTML = (`Se quieren transferir ${volumen} kilos de prensado pero solo hay ${this.volumenPrensado} disponibles`)
             }else{
-                console.log(`La cantidad de prensado que quiere transferir supera la capacidad maxima del rotadisco`)
+                infoPrensa.innerHTML = (`La cantidad de prensado que quiere transferir supera la capacidad maxima del rotadisco`)
             }
         },
     }
@@ -110,7 +115,7 @@
 
     const rtd = {
         materiaPrima: "Harina de Pescado",
-        capacidad: 10000,
+        capacidad: 2000,
         volumenActual: 0,
         volumenSecado: 0,
         temperatura: 0,
@@ -119,24 +124,24 @@
             if (volumen > 0 && volumen <= this.volumenActual){
                 this.volumenActual -= volumen
                 this.volumenSecado += volumen
-                console.log(`Se secan ${volumen} kilos del prensado ingresado al rotadisco`)
+                infoRtd.innerHTML = (`Se secan ${volumen} kilos del prensado ingresado al rotadisco`)
             }else if(volumen == 0){
-                console.log("El rotadisco se encuentra vacio")
+                infoRtd.innerHTML = ("El rotadisco se encuentra vacio")
             }else{
-                console.log("Se deja de ingresar prensado por equipo sobrecargado")
+                infoRtd.innerHTML = ("Se deja de ingresar prensado por equipo sobrecargado")
             }
         },
         trasnferirHarina: function(volumen){
             if(volumen > 0 && volumen <= this.volumenSecado && volumen <= (silo.capacidad - silo.volumenActual)){
                 this.volumenSecado -= volumen
                 silo.volumenActual += volumen
-                console.log(`Se transfieren ${volumen} kilos de harina al silo`)
+                infoRtd.innerHTML = (`Se transfieren ${volumen} kilos de harina al silo`)
             }else if(volumen == 0){
                 colsole.log(`El silo se encuentra vacio`)
             }else if(volumen > this.volumenSecado){
-                console.log(`Se quieren transferir ${volumen} kilos de harina pero solo hay ${this.volumenSecado} disponibles`)
+                infoRtd.innerHTML = (`Se quieren transferir ${volumen} kilos de harina pero solo hay ${this.volumenSecado} disponibles`)
             }else{
-                console.log(`La cantidad de prensado que quiere transferir supera la capacidad maxima del silo`)
+                infoRtd.innerHTML = (`La cantidad de prensado que quiere transferir supera la capacidad maxima del silo`)
             }
             
         },
@@ -148,18 +153,18 @@
 
     const silo={
         producto: "Harina de Pescado",
-        capacidad: 10000,
+        capacidad: 2000,
         volumenActual: 0,
         averiguarBolsas: function(){
             let bolsasDisponibles = Math.floor(this.volumenActual / 50)
-            console.log(`La cantidad de bolsas disponibles es ${bolsasDisponibles}`)
+            infoSilo.innerHTML = (`La cantidad de bolsas disponibles es ${bolsasDisponibles}`)
             return bolsasDisponibles
         },
         sacarBolsas: function(cantidadBolsas){
             if(cantidadBolsas <= Math.floor(this.volumenActual / 50)){
                 this.volumenActual -= cantidadBolsas * 50
                 organizadorLote.bolsasTotales += cantidadBolsas
-                console.log(`Se embolsaron ${cantidadBolsas} bolsas de 50 kilos`)
+                infoSilo.innerHTML = (`Se embolsaron ${cantidadBolsas} bolsas de 50 kilos`)
             }
         },
     }
@@ -175,8 +180,8 @@
                 this.bolsasTotales -= lotesDisponibles * 10
                 for(let i = 0; i < lotesDisponibles; i++){
                     Lotes.push(`Lote numero ${Lotes.length + 1}`)
-                    console.log(`Se crean ${Lotes.length + 1} Lotes`)
                 }
+            infoLote.innerHTML = (`Se crean ${Lotes.length} Lotes`)
             }
             // Se guardan las bolsas totales en localStorage
             localStorage.setItem('bolsasTotales', this.bolsasTotales);
@@ -193,6 +198,7 @@ let inputPileta = document.getElementById('input1')
 let boton1 = document.getElementById("btn1")
 let boton2 = document.getElementById("btn2")
 let volumenPileta = document.getElementById('volumenActual')
+let infoPileta = document.getElementById('infoPileta')
 
 function insertarPescadoPileta () {
     let numero = parseInt(inputPileta.value)
@@ -221,6 +227,7 @@ let volumenCocinado = document.getElementById('volumenCocinado')
 let btnCocinar = document.getElementById('btnCocinar')
 let inputCocinador = document.getElementById('inputCocinador')
 let btnTransCocinado = document.getElementById('btnTransCocinado')
+let infoCocinador = document.getElementById('infoCocinador')
 
 function cocinarPescadoCrudo () {
     let numero = parseInt(inputCocinador.value)
@@ -250,6 +257,7 @@ let volumenPrensado = document.getElementById('volumenPrensado')
 let btnCocinado = document.getElementById('btnCocinado')
 let inputPrensa = document.getElementById('inputPrensa')
 let btnTransPrensado = document.getElementById('btnTransPrensado')
+let infoPrensa = document.getElementById('infoPrensa')
 
 function prensarCocinado () {
     let numero = parseInt(inputPrensa.value)
@@ -279,6 +287,7 @@ let volumenHarinaRtd = document.getElementById('volumenHarinaRtd')
 let btnSecarHarina = document.getElementById('btnSecarHarina')
 let inputRtd = document.getElementById('inputRtd')
 let btnTransHarina = document.getElementById('btnTransHarina')
+let infoRtd = document.getElementById('infoRtd')
 
 function secarPrensado () {
     let numero = parseInt(inputRtd.value)
@@ -308,6 +317,7 @@ let cantidadBolsaSilo = document.getElementById('cantidadBolsaSilo')
 let btnBolsaSilo = document.getElementById('btnBolsaSilo')
 let inputSilo = document.getElementById('inputSilo')
 let btnSacarBolsas = document.getElementById('btnSacarBolsas')
+let infoSilo = document.getElementById('infoSilo')
 
 
 
@@ -337,6 +347,7 @@ btnSacarBolsas.addEventListener('click', sacarBolsaSilo)
 let bolsasDisponibles = document.getElementById('bolsasDisponibles')
 let pilasDisponibles = document.getElementById('pilasDisponibles')
 let btnCrearLote = document.getElementById('btnCrearLote')
+let infoLote = document.getElementById('infoLote')
 
 const storedBolsasTotales = localStorage.getItem('bolsasTotales');
     if (storedBolsasTotales) {
