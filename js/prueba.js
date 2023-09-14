@@ -225,15 +225,19 @@
 
     const organizadorLote={
         bolsasTotales: 0,
+        preLotes: 0,
+        postLotes: 0,
         crearLote: function(){
             let lotesDisponibles = Math.floor(this.bolsasTotales / 10);
+            this.preLotes = Lotes.length
             if(lotesDisponibles > 0){
                 this.bolsasTotales -= lotesDisponibles * 10
                 for(let i = 0; i < lotesDisponibles; i++){
-                    Lotes.push(`Lote numero ${Lotes.length + 1}`)
+                    Lotes.push(`Lote numero ${Lotes.length + organizadorLote.preLotes + 1}`)
                 }
             infoLote.innerHTML = `Se crean ${Lotes.length} Lotes`
             }
+            this.postLotes = Lotes.length
         },
     }
 
@@ -402,6 +406,10 @@ let infoLote = document.getElementById('infoLote')
 
 function funCrearLote () {
     organizadorLote.crearLote()
+    for(let i = organizadorLote.preLotes; i <= organizadorLote.postLotes ; i++){
+    infoProduccion.innerHTML += `<div id='lote${i}'>Este es el Lote numero ${i}</div>`
+    }
+    
 //primero se guarda el objeto como un string, pasa a ser tecxto plano, se pasa con JSON.stringify(nombre del objeto)
     let loteString = JSON.stringify(Lotes)
 //segundo se manda el objeto transformado en string al local storage con localStorage.setItem(nombre del objeto string)
@@ -422,20 +430,10 @@ btnCrearLote.addEventListener('click', funCrearLote)
 btnVerLote.addEventListener('click', funVerLote)
 
 
+let infoProduccion = document.getElementById('infoProduccion')
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+//El ciclo se tiene que ejecutar tantas veces como items haya en el array
+//array.length()
 

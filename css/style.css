@@ -1,5 +1,8 @@
 body{
     background-color: rgb(50, 46, 84);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container{
@@ -21,6 +24,7 @@ body{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin: 0 3em 0 3em;
     padding: 1em;
     box-shadow: 10px 10px 10px;
     background-color: white;
@@ -86,4 +90,18 @@ input{
 
 .infoRojo{
     color: red;
+}
+
+.produccion{
+    background-color: rgb(192, 189, 216);
+    border: solid black 3px;
+    border-radius: 1em;
+    width: 85%;
+    height: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
 }
