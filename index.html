@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="/styles/style.css">
 </head>
 
@@ -25,7 +26,7 @@
                     <p id="volumenActual">Volumen Actual: <strong>0 Kg</strong></p>
                 </div>
                 <div class="medioDerecha imagen">
-                    <img src="/assets/pileta1.jpeg" alt="">
+                    <img class="ajustar" src="/assets/Pileta.jpeg" alt="">
                 </div>
             </div>
     
@@ -59,7 +60,7 @@
                     <p id="volumenCocinado">Volumen Cocinado: <strong>0 Kg</strong></p>
                 </div>
                 <div class="medioDerecha imagen">
-                    <img src="/assets/Cocinador 2.JPG" alt="">
+                    <img class="ajustar" src="/assets/Cocinador.JPG" alt="">
                 </div>
             </div>
     
@@ -94,7 +95,7 @@
                     <p id="volumenPrensado">Volumen Prensado: <strong>0 Kg</strong></p>
                 </div>
                 <div class="medioDerecha imagen">
-                    <img src="/assets/Prensa 1.JPG" alt="">
+                    <img class="ajustar" src="/assets/Prensa.JPG" alt="">
                 </div>
             </div>
     
@@ -129,7 +130,7 @@
                     <p id="volumenHarinaRtd">Volumen Harina: <strong>0 Kg</strong></p>
                 </div>
                 <div class="medioDerecha imagen">
-                    <img src="" alt="">
+                    <img class="ajustar" src="./assets/Rotadisco_o.jpg" alt="">
                 </div>
             </div>
     
@@ -164,7 +165,7 @@
                     <p id="cantidadBolsaSilo">Bolsas de 50 Kg: <strong>0</strong> </p>
                 </div>
                 <div class="medioDerecha imagen">
-                    <img src="" alt="">
+                    <img class="ajustar" src="./assets/Silos.jpg" alt="">
                 </div>
             </div>
     
@@ -198,7 +199,7 @@
                     <p id="pilasDisponibles">Cantidad de Lotes: <strong>0</strong></p>
                 </div>
                 <div class="medioDerecha imagen">
-                    <img src="" alt="">
+                    <img class="ajustar" src="./assets/Lotes.jpg" alt="">
                 </div>
             </div>
 
@@ -213,7 +214,7 @@
             </div>
 
             <div class="info">
-                <p id="infoLote">Texto para Lote</p>
+                <p id="infoLote">Lotes disponibles</p>
             </div>
     
     
@@ -221,12 +222,26 @@
     </div>
 
     <div class="produccion" id="infoProduccion">
-        
+        <div id="infoAlto">
+            <h4>Lotes con NBV mayor a 200ppm</h4>
+            <div id="contenedorAlto"></div>
+        </div>
+        <div id="infoBajo">
+            <h4>Lotes con NBV menor a 200ppm</h4>
+            <div id="contenedorBajo"></div>
+        </div>
+        <div id="lotesNuevos">
+            <h4>Lotes obtenidos de produccion</h4>
+            <h6>Sin control de calidad</h6>
+            <div id="infoSinAnalizar"></div>
+
+        </div>
     </div>
 
 
 
 </body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="/scripts/main.js" type="module"></script>
 
 </html>

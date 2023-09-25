@@ -99,9 +99,44 @@ input{
     width: 85%;
     height: 10em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     text-align: center;
     margin-top: 20px;
+}
+
+#infoAlto, #infoBajo{
+    border: solid black 3px;
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+}
+
+.infoLoteAlto, .infoLoteBajo{
+    border: solid black 2px;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+#contenedorAlto, #contenedorBajo{
+    display: flex;
+}
+
+.loteCreado{
+    border: solid black 2px;
+    border-radius: 10px;
+    padding: 0.5em;
+}
+
+#lotesNuevos{
+    flex-direction: column;
+}
+
+#infoSinAnalizar{
+    display: flex;
+}
+
+.ajustar{
+    width: 100%;
 }
